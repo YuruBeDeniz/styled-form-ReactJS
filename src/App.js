@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { GlobalStyle, StyledFormWrapper, StyledButton, StyledError, StyledFieldset, StyledForm, StyledInput, StyledTextArea } from "./App.styles"
 
-
+const initialState = {
+  name: "",
+  email: "",
+  gender: "",
+  message: "",
+}
 
 function App() {
-  const [state, setState] = useState({
-    name: "",
-    email: "",
-    gender: "",
-    message: "",
-  });
+  const [state, setState] = useState(initialState);
   const [error, setError] = useState("");
 
   //we need two callback functions: 1.to submit 2.when the input changes
@@ -26,7 +26,10 @@ function App() {
       }
     }
     setError("");
-    setState({});
+    const regex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+    const test = regex.test(state.email);
+    console.log(test);
+    setState(initialState);
   };
 
   const handleInput = e => {
